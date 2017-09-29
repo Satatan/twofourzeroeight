@@ -14,6 +14,7 @@ namespace twozerofoureight
     {
         Model model;
         Controller controller;
+        
        
         public TwoZeroFourEightView()
         {
@@ -23,6 +24,7 @@ namespace twozerofoureight
             controller = new TwoZeroFourEightController();
             controller.AddModel(model);
             controller.ActionPerformed(TwoZeroFourEightController.LEFT);
+            textBox1.Text = "0";
         }
 
         public void Notify(Model m)
@@ -96,6 +98,5 @@ namespace twozerofoureight
         {
             controller.ActionPerformed(TwoZeroFourEightController.DOWN);
         }
-
     }
 }

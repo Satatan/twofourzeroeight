@@ -135,6 +135,7 @@ namespace twozerofoureight
                     {
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
+                        
                     }
                 }
                 // shift left again
