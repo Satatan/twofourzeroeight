@@ -62,7 +62,7 @@
             this.lbl00.Size = new System.Drawing.Size(67, 62);
             this.lbl00.TabIndex = 0;
             this.lbl00.Text = "0";
-            this.lbl00.Click += new System.EventHandler(this.lbl00_Click);
+            
             // 
             // lbl01
             // 
@@ -75,7 +75,6 @@
             this.lbl01.Size = new System.Drawing.Size(67, 62);
             this.lbl01.TabIndex = 1;
             this.lbl01.Text = "0";
-            this.lbl01.Click += new System.EventHandler(this.lbl01_Click);
             // 
             // lbl02
             // 
@@ -88,7 +87,6 @@
             this.lbl02.Size = new System.Drawing.Size(67, 62);
             this.lbl02.TabIndex = 2;
             this.lbl02.Text = "0";
-            this.lbl02.Click += new System.EventHandler(this.lbl02_Click);
             // 
             // lbl03
             // 
@@ -137,7 +135,6 @@
             this.lbl11.Size = new System.Drawing.Size(67, 62);
             this.lbl11.TabIndex = 5;
             this.lbl11.Text = "0";
-            this.lbl11.Click += new System.EventHandler(this.lbl11_Click);
             // 
             // lbl10
             // 
@@ -250,7 +247,7 @@
             // btnLeft
             // 
             this.btnLeft.Location = new System.Drawing.Point(97, 459);
-            this.btnLeft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLeft.Margin = new System.Windows.Forms.Padding(4);
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(71, 55);
             this.btnLeft.TabIndex = 16;
@@ -261,7 +258,7 @@
             // btnUp
             // 
             this.btnUp.Location = new System.Drawing.Point(189, 396);
-            this.btnUp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUp.Margin = new System.Windows.Forms.Padding(4);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(71, 55);
             this.btnUp.TabIndex = 17;
@@ -272,7 +269,7 @@
             // btnRight
             // 
             this.btnRight.Location = new System.Drawing.Point(282, 459);
-            this.btnRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRight.Margin = new System.Windows.Forms.Padding(4);
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(71, 55);
             this.btnRight.TabIndex = 18;
@@ -283,7 +280,7 @@
             // btnDown
             // 
             this.btnDown.Location = new System.Drawing.Point(189, 459);
-            this.btnDown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDown.Margin = new System.Windows.Forms.Padding(4);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(71, 55);
             this.btnDown.TabIndex = 19;
@@ -299,7 +296,6 @@
             this.textBox1.Size = new System.Drawing.Size(353, 57);
             this.textBox1.TabIndex = 20;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // TwoZeroFourEightView
             // 
@@ -327,7 +323,7 @@
             this.Controls.Add(this.lbl02);
             this.Controls.Add(this.lbl01);
             this.Controls.Add(this.lbl00);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "TwoZeroFourEightView";
             this.Text = "Form1";
             this.ResumeLayout(false);
