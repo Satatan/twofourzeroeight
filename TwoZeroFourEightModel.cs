@@ -12,6 +12,8 @@ namespace twozerofoureight
         protected int[,] board;
         protected Random rand;
         protected int score = 0;
+        protected bool Move = false;
+        protected int[,] boardcopy;
 
         public TwoZeroFourEightModel() : this(4)
         {
@@ -40,7 +42,8 @@ namespace twozerofoureight
             }
             rand = new Random();
             board = Random(board);
-            NotifyAll();
+            board = Random(board);
+            NotifyAll();         
         }
 
         private int[,] Random(int[,] input)
@@ -50,17 +53,19 @@ namespace twozerofoureight
                 int x = rand.Next(boardSize);
                 int y = rand.Next(boardSize);
                 if (board[x, y] == 0)
-                {
-                    board[x, y] = 2;
-                    break;
-                }
-            }
+                    {
+                        board[x, y] = 2;
+                        break;
+                    }
+                }    
             return input;
         }
 
         public void PerformDown()
         {
+            boardcopy = new int[boardSize, boardSize];
             int[] buffer;
+            int[] copyJ;
             int pos;
             int[] rangeX = Enumerable.Range(0, boardSize).ToArray();
             int[] rangeY = Enumerable.Range(0, boardSize).ToArray();
@@ -69,6 +74,7 @@ namespace twozerofoureight
             {
                 pos = 0;
                 buffer = new int[4];
+                copyJ = new int[4];
                 foreach (int k in rangeX)
                 {
                     buffer[k] = 0;
@@ -76,6 +82,7 @@ namespace twozerofoureight
                 //shift left
                 foreach (int j in rangeY)
                 {
+                    copyJ[j] = board[j, i];
                     if (board[j, i] != 0)
                     {
                         buffer[pos] = board[j, i];
@@ -90,6 +97,7 @@ namespace twozerofoureight
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
                         score += buffer[j - 1];
+                        Move = true;
                     }
                 }
                 // shift left again
@@ -107,21 +115,33 @@ namespace twozerofoureight
                 {
                     board[k, i] = 0;
                 }
-            }
-            board = Random(board);
-            NotifyAll();
+                for (int q = 0; q < boardSize; q++)
+                {
+                    if(copyJ[q] != board[q, i])
+                    {
+                        Move = true;
+                    }
+                }
+            }             
+            if(Move)
+            {
+                board = Random(board);              
+                Move = false;
+            }          
+            NotifyAll();                     
         }
 
         public void PerformUp()
         {
             int[] buffer;
             int pos;
-
+            int[] copyJ;
             int[] range = Enumerable.Range(0, boardSize).ToArray();
             foreach (int i in range)
             {
                 pos = 0;
                 buffer = new int[4];
+                copyJ = new int[4];
                 foreach (int k in range)
                 {
                     buffer[k] = 0;
@@ -129,10 +149,11 @@ namespace twozerofoureight
                 //shift left
                 foreach (int j in range)
                 {
+                    copyJ[j] = board[j, i];
                     if (board[j, i] != 0)
                     {
                         buffer[pos] = board[j, i];
-                        pos++;
+                        pos++;           
                     }
                 }
                 // check duplicate
@@ -143,7 +164,7 @@ namespace twozerofoureight
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
                         score += buffer[j - 1];
-
+                        Move = true;
                     }
                 }
                 // shift left again
@@ -153,7 +174,7 @@ namespace twozerofoureight
                     if (buffer[j] != 0)
                     {
                         board[pos, i] = buffer[j];
-                        pos++;
+                        pos++;                    
                     }
                 }
                 // copy back
@@ -161,8 +182,19 @@ namespace twozerofoureight
                 {
                     board[k, i] = 0;
                 }
+                for (int q = 0; q < boardSize; q++)
+                {
+                    if (copyJ[q] != board[q, i])
+                    {
+                        Move = true;
+                    }
+                }
             }
-            board = Random(board);
+            if (Move)
+            {
+                board = Random(board);              
+                Move = false;
+            }
             NotifyAll();
         }
 
@@ -170,7 +202,7 @@ namespace twozerofoureight
         {
             int[] buffer;
             int pos;
-
+            int[] copyJ;
             int[] rangeX = Enumerable.Range(0, boardSize).ToArray();
             int[] rangeY = Enumerable.Range(0, boardSize).ToArray();
             Array.Reverse(rangeX);
@@ -178,6 +210,7 @@ namespace twozerofoureight
             {
                 pos = 0;
                 buffer = new int[4];
+                copyJ = new int[4];
                 foreach (int k in rangeY)
                 {
                     buffer[k] = 0;
@@ -185,10 +218,12 @@ namespace twozerofoureight
                 //shift left
                 foreach (int j in rangeX)
                 {
+                    copyJ[j] = board[i, j];
                     if (board[i, j] != 0)
                     {
                         buffer[pos] = board[i, j];
                         pos++;
+                        
                     }
                 }
                 // check duplicate
@@ -199,6 +234,7 @@ namespace twozerofoureight
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
                         score += buffer[j - 1];
+                        Move = true;
                     }
                 }
                 // shift left again
@@ -209,6 +245,7 @@ namespace twozerofoureight
                     {
                         board[i, pos] = buffer[j];
                         pos--;
+                        
                     }
                 }
                 // copy back
@@ -216,8 +253,20 @@ namespace twozerofoureight
                 {
                     board[i, k] = 0;
                 }
+                for (int q = 0; q < boardSize; q++)
+                {
+                    if (copyJ[q] != board[i, q])
+                    {
+                        Move = true;
+                    }
+                }
             }
-            board = Random(board);
+            if (Move)
+            {
+                board = Random(board);
+               
+                Move = false;
+            }
             NotifyAll();
         }
 
@@ -225,11 +274,13 @@ namespace twozerofoureight
         {
             int[] buffer;
             int pos;
+            int[] copyJ;
             int[] range = Enumerable.Range(0, boardSize).ToArray();
             foreach (int i in range)
             {
                 pos = 0;
                 buffer = new int[boardSize];
+                copyJ = new int[4];
                 foreach (int k in range)
                 {
                     buffer[k] = 0;
@@ -237,6 +288,7 @@ namespace twozerofoureight
                 //shift left
                 foreach (int j in range)
                 {
+                    copyJ[j] = board[i, j];
                     if (board[i, j] != 0)
                     {
                         buffer[pos] = board[i, j];
@@ -251,6 +303,7 @@ namespace twozerofoureight
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
                         score += buffer[j - 1];
+                        Move = true;
                     }
                 }
                 // shift left again
@@ -261,14 +314,27 @@ namespace twozerofoureight
                     {
                         board[i, pos] = buffer[j];
                         pos++;
+                       
                     }
                 }
                 for (int k = pos; k != boardSize; k++)
                 {
                     board[i, k] = 0;
                 }
+                for (int q = 0; q < boardSize; q++)
+                {
+                    if (copyJ[q] != board[i, q])
+                    {
+                        Move = true;
+                    }
+                }
             }
-            board = Random(board);
+            if (Move)
+            {
+                board = Random(board);
+                
+                Move = false;
+            }
             NotifyAll();
         }
     }
