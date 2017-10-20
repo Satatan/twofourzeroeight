@@ -31,6 +31,7 @@ namespace twozerofoureight
         {
             UpdateBoard(((TwoZeroFourEightModel) m).GetBoard());
             Updatescore(((TwoZeroFourEightModel) m).Getscore());
+            UpdateGame(((TwoZeroFourEightModel) m).GetOver());
 
         }
 
@@ -84,6 +85,15 @@ namespace twozerofoureight
         private void Updatescore(int score)
         {
             textBox1.Text = Convert.ToString(score);
+        }
+
+        private void UpdateGame(bool over)
+        {
+            if (over)
+            {
+                textBox1.Text = "Error";
+            }
+
         }
 
         private void btnLeft_Click(object sender, EventArgs e)

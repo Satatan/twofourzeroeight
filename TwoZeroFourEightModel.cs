@@ -14,6 +14,7 @@ namespace twozerofoureight
         protected int score = 0;
         protected bool Move = false;
         protected int[,] boardcopy;
+        protected bool Over;
 
         public TwoZeroFourEightModel() : this(4)
         {
@@ -28,6 +29,34 @@ namespace twozerofoureight
         public int Getscore()
         {
             return score;
+        }
+
+        public bool GetOver()
+        {
+            Over = true;
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize - 1; j++)
+                {
+                    if(board[i,j] == 0 || board[i, j] == board[i, j + 1])
+                    {
+                        Over = false;
+                        break;
+                    }
+                }
+            }
+            for (int j = 0; j < boardSize; j++)
+            {
+                for (int i = 0; i < boardSize - 1; i++)
+                {
+                    if (board[i, j] == 0 || board[i, j] == board[i+1, j])
+                    {
+                        Over = false;
+                        break;
+                    }
+                }
+            }
+            return Over;
         }
 
         public TwoZeroFourEightModel(int size)
@@ -97,7 +126,7 @@ namespace twozerofoureight
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
                         score += buffer[j - 1];
-                        Move = true;
+                       
                     }
                 }
                 // shift left again
@@ -164,7 +193,6 @@ namespace twozerofoureight
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
                         score += buffer[j - 1];
-                        Move = true;
                     }
                 }
                 // shift left again
@@ -234,7 +262,6 @@ namespace twozerofoureight
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
                         score += buffer[j - 1];
-                        Move = true;
                     }
                 }
                 // shift left again
@@ -303,7 +330,6 @@ namespace twozerofoureight
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
                         score += buffer[j - 1];
-                        Move = true;
                     }
                 }
                 // shift left again
