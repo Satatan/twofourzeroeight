@@ -91,7 +91,7 @@ namespace twozerofoureight
         {
             if (over)
             {
-                textBox1.Text = "Error";
+                System.Windows.Forms.MessageBox.Show("         Game Over");
             }
 
         }
@@ -116,6 +116,27 @@ namespace twozerofoureight
             controller.ActionPerformed(TwoZeroFourEightController.DOWN);
         }
 
-       
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Up:
+                    controller.ActionPerformed(TwoZeroFourEightController.UP);
+                    return true;
+                case Keys.Left:
+                    controller.ActionPerformed(TwoZeroFourEightController.LEFT);
+                    return true;
+                case Keys.Right:
+                    controller.ActionPerformed(TwoZeroFourEightController.RIGHT);
+                    return true;
+                case Keys.Down:
+                    controller.ActionPerformed(TwoZeroFourEightController.DOWN);
+                    return true;
+                // ...
+                default:
+                    return base.ProcessCmdKey(ref msg, keyData);
+            }
+        }
+
     }
 }
